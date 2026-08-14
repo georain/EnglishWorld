@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">英语天地</string>
+    <string name="tab_home">首页</string>
+    <string name="tab_search">查词</string>
+    <string name="tab_learn">学习</string>
+    <string name="tab_mine">我的</string>
+    <string name="search_hint">输入英文单词...</string>
+    <string name="welcome">欢迎来到英语天地</string>
+</resources>

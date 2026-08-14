@@ -1,0 +1,16 @@
+# Build artifacts
+build/
+.gradle/
+*.apk
+*.aab
+*.keystore
+*.jks
+local.properties
+
+# IDE files
+.idea/
+*.iml
+.DS_Store
+
+# Gradle
+gradle/wrapper/gradle-wrapper.jar

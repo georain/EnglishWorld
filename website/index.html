@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英语天地 - 让英语学习更简单</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        /* 导航栏 */
+        .navbar {
+            background: linear-gradient(135deg, #4A90D9 0%, #357ABD 100%);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo .material-icons {
+            font-size: 28px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* Hero区域 */
+        .hero {
+            margin-top: 70px;
+            padding: 80px 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #4A90D9 0%, #6BB3F0 50%, #FF6B6B 100%);
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn .material-icons {
+            font-size: 20px;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #4A90D9;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #4A90D9;
+        }
+
+        /* 功能特性 */
+        .features {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: #333;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #4A90D9, #6BB3F0);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .feature-icon .material-icons {
+            font-size: 32px;
+            color: white;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* 数据统计 */
+        .stats {
+            background: linear-gradient(135deg, #4A90D9 0%, #357ABD 100%);
+            padding: 60px 20px;
+            color: white;
+        }
+
+        .stats-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        /* 单词库展示 */
+        .wordbank {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .wordbank-content {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .word-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .category-card {
+            padding: 25px;
+            border-radius: 10px;
+            border-left: 4px solid #4A90D9;
+            background: #F8FBFF;
+        }
+
+        .category-card h4 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #4A90D9;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .category-card h4 .material-icons {
+            font-size: 22px;
+        }
+
+        .category-card p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* 页脚 */
+        .footer {
+            background: #2C3E50;
+            color: white;
+            padding: 40px 20px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .copyright {
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* 动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 16px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span class="material-icons">menu_book</span>
+                英语天地
+            </a>
+            <div class="nav-links">
+                <a href="#features">功能特点</a>
+                <a href="#wordbank">单词库</a>
+                <a href="#download">下载</a>
+                <a href="#about">关于我们</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero区域 -->
+    <section class="hero">
+        <h1>让英语学习更简单有趣</h1>
+        <p>专为中小学生打造的英语学习工具，涵盖小学初中全部核心词汇</p>
+        <div class="btn-group">
+            <a href="#download" class="btn btn-primary">
+                <span class="material-icons">download</span>
+                立即下载
+            </a>
+            <a href="#features" class="btn btn-secondary">
+                <span class="material-icons">info</span>
+                了解更多
+            </a>
+        </div>
+    </section>
+
+    <!-- 功能特点 -->
+    <section id="features" class="features">
+        <h2 class="section-title">核心功能</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <span class="material-icons">search</span>
+                </div>
+                <h3>智能查词</h3>
+                <p>快速查找英文单词，支持模糊搜索，提供音标、释义和例句，帮助理解记忆。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <span class="material-icons">school</span>
+                </div>
+                <h3>分级学习</h3>
+                <p>按照小学、初中、高中分级展示词汇，循序渐进，科学安排学习进度。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <span class="material-icons">star</span>
+                </div>
+                <h3>每日推荐</h3>
+                <p>每日精选单词和学习内容，配合例句和练习，让学习更有针对性。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <span class="material-icons">insert_chart</span>
+                </div>
+                <h3>学习统计</h3>
+                <p>记录学习轨迹，可视化展示学习进度，激励持续学习。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <span class="material-icons">offline_bolt</span>
+                </div>
+                <h3>离线使用</h3>
+                <p>内置完整词库，无需联网即可查词学习，随时随地轻松学。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <span class="material-icons">replay</span>
+                </div>
+                <h3>复习巩固</h3>
+                <p>智能复习算法，根据遗忘曲线提醒复习，高效巩固所学知识。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 数据统计 -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>2000+</h3>
+                <p>收录单词数量</p>
+            </div>
+            <div class="stat-item">
+                <h3>500+</h3>
+                <p>精选例句</p>
+            </div>
+            <div class="stat-item">
+                <h3>3</h3>
+                <p>覆盖年级阶段</p>
+            </div>
+            <div class="stat-item">
+                <h3>100%</h3>
+                <p>免费使用</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 单词库介绍 -->
+    <section id="wordbank" class="wordbank">
+        <h2 class="section-title">完善的单词库</h2>
+        <div class="wordbank-content">
+            <p style="text-align: center; color: #666; font-size: 16px;">
+                我们精心整理了中小学英语核心词汇，每个单词都配有音标、中文释义和实用例句
+            </p>
+            <div class="word-categories">
+                <div class="category-card">
+                    <h4><span class="material-icons">looks_one</span> 小学词汇（约800词）</h4>
+                    <p>涵盖小学阶段基础词汇，包括动物、水果、颜色、数字、家庭成员等常见主题，为英语学习打下坚实基础。</p>
+                </div>
+                <div class="category-card">
+                    <h4><span class="material-icons">looks_two</span> 初中词汇（约1600词）</h4>
+                    <p>包含中考必备核心词汇，涉及日常生活、学校教育、社会文化等多个领域，助力中考英语取得好成绩。</p>
+                </div>
+                <div class="category-card">
+                    <h4><span class="material-icons">looks_3</span> 高中词汇（扩展中）</h4>
+                    <p>正在整理高中及高考相关词汇，敬请期待更多精彩内容...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 下载区域 -->
+    <section id="download" style="text-align: center; padding: 60px 20px; background: white;">
+        <h2 class="section-title">立即开始学习</h2>
+        <p style="color: #666; margin-bottom: 30px; font-size: 16px;">扫描二维码或点击下方按钮下载APP</p>
+        <div class="btn-group" style="justify-content: center;">
+            <a href="#" class="btn btn-primary" style="background: #4A90D9; color: white;">
+                <span class="material-icons">android</span>
+                Android版下载
+            </a>
+            <a href="#" class="btn btn-secondary" style="border-color: #4A90D9; color: #4A90D9;">
+                <span class="material-icons">phone_iphone</span>
+                iOS版即将上线
+            </a>
+        </div>
+    </section>
+
+    <!-- 关于我们 -->
+    <section id="about" style="background: #f5f5f5; padding: 60px 20px;">
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <h2 class="section-title">关于英语天地</h2>
+            <p style="color: #666; line-height: 1.8; font-size: 16px;">
+                英语天地是一款专注于中小学英语学习的移动应用。我们致力于为学生提供简单、高效的英语学习工具，
+                帮助每一位学习者轻松掌握英语词汇，提升英语能力。我们的团队由资深教育工作者和技术专家组成，
+                持续优化产品体验，为用户创造更大的价值。
+            </p>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">首页</a>
+                <a href="#">功能介绍</a>
+                <a href="#">帮助中心</a>
+                <a href="#">隐私政策</a>
+                <a href="#">联系我们</a>
+            </div>
+            <p class="copyright">&copy; 2026 英语天地 EnglishWorld. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

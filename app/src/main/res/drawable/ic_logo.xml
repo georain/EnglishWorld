@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+    
+    <!-- 背景圆形 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M60,60m-50,0a50,50 0,1 1,100 0a50,50 0,1 1,-100 0" />
+    
+    <!-- 字母 E -->
+    <path
+        android:fillColor="#4A90D9"
+        android:pathData="M35,40 L55,40 L55,46 L42,46 L42,52 L53,52 L53,58 L42,58 L42,64 L56,64 L56,70 L35,70 Z" />
+    
+    <!-- 字母 W 简化 -->
+    <path
+        android:fillColor="#FF6B6B"
+        android:pathData="M62,40 L67,58 L72,45 L77,58 L82,40 L76,40 L74,52 L71,43 L69,52 L67,40 Z" />
+</vector>

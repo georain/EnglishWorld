@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="70dp"
+    android:height="70dp"
+    android:viewportWidth="70"
+    android:viewportHeight="70">
+    
+    <!-- 背景圆形 -->
+    <path
+        android:fillColor="#E3F2FD"
+        android:pathData="M35,35m-32,0a32,32 0,1 1,64 0a32,32 0,1 1,-64 0" />
+    
+    <!-- 人物图标 -->
+    <path
+        android:fillColor="#4A90D9"
+        android:pathData="M35,20c4.42,0 8,3.58 8,8s-3.58,8 -8,8 -8,-3.58 -8,-8 3.58,-8 8,-8zM35,40c5.34,0 16,2.68 16,8v4H19v-4c0,-5.32 10.66,-8 16,-8z"/>
+</vector>

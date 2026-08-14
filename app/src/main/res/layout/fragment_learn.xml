@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:orientation="vertical">
+
+    <!-- 标题 -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="单词学习"
+        android:textColor="@color/text_primary"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <!-- 年级选择器 -->
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroupLevel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="小学" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipMiddle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="初中" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipHigh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="高中" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <!-- 单词列表 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewWords"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="12dp"
+        android:clipToPadding="false"
+        android:paddingBottom="16dp" />
+
+</LinearLayout>
