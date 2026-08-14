@@ -1,11 +1,14 @@
 # Build artifacts
 build/
 .gradle/
-*.apk
 *.aab
 *.keystore
 *.jks
 local.properties
+
+# 官网下载的 APK 需要入库（忽略其他 apk）
+*.apk
+!website/*.apk
 
 # IDE files
 .idea/
