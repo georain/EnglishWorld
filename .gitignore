@@ -12,5 +12,5 @@ local.properties
 *.iml
 .DS_Store
 
-# Gradle
-gradle/wrapper/gradle-wrapper.jar
+# Gradle wrapper jar is REQUIRED for CI, do not ignore
+# gradle/wrapper/gradle-wrapper.jar
