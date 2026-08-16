@@ -12,13 +12,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var userData: UserDataManager
 
-    private val fragments = listOf(
-        HomeFragment(),
-        SearchFragment(),
-        LearnFragment(),
-        MineFragment()
-    )
-
     private val tabTitles = listOf(
         R.string.tab_home,
         R.string.tab_search,
@@ -35,7 +28,6 @@ class MainActivity : AppCompatActivity() {
 
         setupViewPager()
         setupTabLayout()
-        setupFragmentListeners()
 
         // 首次启动弹出隐私政策与用户协议
         binding.root.post {
@@ -45,14 +37,13 @@ class MainActivity : AppCompatActivity() {
 
     /** 供首页等功能卡片跳转到指定 Tab */
     fun navigateToTab(position: Int) {
-        if (position in 0 until fragments.size) {
+        if (position in 0 until 4) {
             binding.viewPager.setCurrentItem(position, true)
         }
     }
 
     private fun setupViewPager() {
-        val adapter = ViewPagerAdapter(this, fragments)
-        binding.viewPager.adapter = adapter
+        binding.viewPager.adapter = ViewPagerAdapter(this)
     }
 
     private fun setupTabLayout() {
@@ -65,11 +56,6 @@ class MainActivity : AppCompatActivity() {
         binding.tabLayout.getTabAt(1)?.setIcon(R.drawable.ic_search)
         binding.tabLayout.getTabAt(2)?.setIcon(R.drawable.ic_learn)
         binding.tabLayout.getTabAt(3)?.setIcon(R.drawable.ic_mine)
-    }
-
-    private fun setupFragmentListeners() {
-        val homeFragment = fragments[0] as HomeFragment
-        homeFragment.setOnNavigateListener { position -> navigateToTab(position) }
     }
 
     /** 首次启动协议弹窗 */

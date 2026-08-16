@@ -12,12 +12,6 @@ import java.util.Calendar
 
 class HomeFragment : Fragment() {
 
-    private var navigateListener: ((Int) -> Unit)? = null
-
-    fun setOnNavigateListener(listener: (Int) -> Unit) {
-        navigateListener = listener
-    }
-
     // 每日一句（真实英语名言，按日期轮换）
     private val dailyQuotes = listOf(
         Pair("Practice makes perfect.", "熟能生巧"),
@@ -64,10 +58,10 @@ class HomeFragment : Fragment() {
     /** 四个功能卡片全部可点击 */
     private fun setupFeatureCards(view: View) {
         view.findViewById<CardView>(R.id.cardWordSearch).setOnClickListener {
-            navigateListener?.invoke(1) // 查词
+            (activity as? MainActivity)?.navigateToTab(1) // 查词
         }
         view.findViewById<CardView>(R.id.cardDailyLearn).setOnClickListener {
-            navigateListener?.invoke(2) // 学习
+            (activity as? MainActivity)?.navigateToTab(2) // 学习
         }
         view.findViewById<CardView>(R.id.cardReview).setOnClickListener {
             // 复习巩固：打开收藏单词列表（真实收藏数据）
