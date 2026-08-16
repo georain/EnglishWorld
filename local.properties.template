@@ -1,0 +1,25 @@
+## This file must *NOT* be checked into Version Control Systems,
+# as it contains information specific to your local configuration.
+#
+# Location of the Android SDK. This is only used by Gradle.
+#
+# For customization when using a separate Android SDK installation,
+# Uncomment one of the following lines (or add your own SDK path) and adjust accordingly.
+
+# Windows 示例：
+# sdk.dir=C\:\\Users\\YourName\\AppData\\Local\\Android\\Sdk
+# sdk.dir=C\:\\Android\\Sdk
+
+# macOS 示例：
+# sdk.dir=/Users/YourName/Library/Android/sdk
+
+# Linux 示例：
+# sdk.dir=/home/YourName/Android/Sdk
+
+# ------------------------------------------------------------
+# 查找 Android SDK 路径的方法：
+# 方法 1：打开 Android Studio → Settings → Appearance & Behavior 
+#         → System Settings → Android SDK，查看 "Android SDK Location"
+# 方法 2：在 Windows 资源管理器中搜索 "platforms" 文件夹，
+#         通常在 Android/Sdk 目录下
+# ------------------------------------------------------------

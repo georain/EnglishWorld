@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EnglishWorld</title>
+    <meta name="description" content="EnglishWorld helps learners practice listening, vocabulary, and confident communication." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a class="logo" href="#top" aria-label="EnglishWorld home">
+          <span class="logo-mark">EW</span>
+          <span>EnglishWorld</span>
+        </a>
+
+        <nav class="main-nav" aria-label="Main navigation">
+          <button class="nav-link" data-target="home">Home</button>
+          <button class="nav-link" data-target="features">Features</button>
+          <button class="nav-link" data-target="learning">Learning</button>
+          <button class="nav-link" data-target="privacy">Privacy</button>
+          <button class="nav-link" data-target="terms">Terms</button>
+        </nav>
+
+        <div class="nav-actions">
+          <button class="btn btn-ghost" id="themeToggle" type="button" aria-label="Toggle color theme">Switch theme</button>
+          <a class="btn btn-primary" href="#contact">Get started</a>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero section" id="home">
+        <div class="container hero-layout">
+          <div class="hero-copy">
+            <p class="eyebrow">Build real English confidence</p>
+            <h1>Speak English clearly, study every day, and keep growing.</h1>
+            <p class="lede">EnglishWorld gives learners practical vocabulary, listening patterns, and speaking exercises that translate into everyday confidence.</p>
+            <div class="cta-row">
+              <button class="btn btn-primary" type="button" data-scroll="features">Explore features</button>
+              <button class="btn btn-secondary" type="button" data-scroll="learning">See learning path</button>
+            </div>
+            <ul class="hero-points" aria-label="Key benefits">
+              <li>Daily practice routines</li>
+              <li>Clear step-by-step learning</li>
+              <li>Privacy-first experience</li>
+            </ul>
+          </div>
+
+          <div class="hero-card" aria-label="Course overview card">
+            <div class="card-top">
+              <span class="chip">Live learning</span>
+              <span class="rating">★ 4.9</span>
+            </div>
+            <h2>EnglishWorld Pro</h2>
+            <div class="stats-grid">
+              <div>
+                <strong>12</strong>
+                <span>Core units</span>
+              </div>
+              <div>
+                <strong>4x</strong>
+                <span>Study focus</span>
+              </div>
+              <div>
+                <strong>24/7</strong>
+                <span>Access</span>
+              </div>
+            </div>
+            <button class="btn btn-primary wide" type="button" id="openPrivacy">Review privacy</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="features">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Why learners choose us</p>
+            <h2>Practical learning tools for progress</h2>
+          </div>
+
+          <div class="card-grid three-up">
+            <article class="info-card">
+              <div class="icon">🎧</div>
+              <h3>Listening practice</h3>
+              <p>Build real-world comprehension with short audio-focused drills and clear pronunciation patterns.</p>
+            </article>
+            <article class="info-card">
+              <div class="icon">🗣️</div>
+              <h3>Speaking confidence</h3>
+              <p>Practice everyday language structures that help you speak naturally in conversations and presentations.</p>
+            </article>
+            <article class="info-card">
+              <div class="icon">📚</div>
+              <h3>Vocabulary growth</h3>
+              <p>Learn useful words in context, then review them with focused repetition and guided examples.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section muted" id="learning">
+        <div class="container two-col">
+          <div>
+            <p class="eyebrow">Learning journey</p>
+            <h2>A clear path from basics to confident communication.</h2>
+            <p class="text-block">Every lesson is designed to move learners from essential vocabulary to meaningful conversation practice. The focus stays on real use, not memorization without context.</p>
+            <button class="btn btn-primary" type="button" data-scroll="contact">Book a learning plan</button>
+          </div>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <span class="step">01</span>
+              <div>
+                <h3>Foundation</h3>
+                <p>Build vocabulary, sentence patterns, and pronunciation habits.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span class="step">02</span>
+              <div>
+                <h3>Practice</h3>
+                <p>Use short exercises to improve listening, speaking, and recall.</p>
+              </div>
+            </div>
+            <div class="timeline-item">
+              <span class="step">03</span>
+              <div>
+                <h3>Fluency</h3>
+                <p>Apply what you learn in everyday conversations and stronger self-expression.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="container form-shell">
+          <div class="section-heading left">
+            <p class="eyebrow">Contact</p>
+            <h2>Start learning with a plan that fits your level.</h2>
+          </div>
+
+          <form id="contactForm" novalidate>
+            <div class="field-row">
+              <label>
+                Full name
+                <input type="text" name="name" placeholder="Your name" required />
+              </label>
+              <label>
+                Email address
+                <input type="email" name="email" placeholder="you@example.com" required />
+              </label>
+            </div>
+
+            <label>
+              Learning goal
+              <textarea name="goal" rows="4" placeholder="I want to improve my speaking confidence for work and travel." required></textarea>
+            </label>
+
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit">Send request</button>
+              <button class="btn btn-ghost" type="button" id="clearForm">Clear form</button>
+            </div>
+            <p id="formStatus" class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-wrap">
+        <div>
+          <a class="logo footer-logo" href="#top" aria-label="EnglishWorld home">
+            <span class="logo-mark">EW</span>
+            <span>EnglishWorld</span>
+          </a>
+          <p>Practical English learning for everyday communication.</p>
+        </div>
+        <div class="footer-links">
+          <button class="text-link" type="button" data-policy="privacy">Privacy policy</button>
+          <button class="text-link" type="button" data-policy="terms">User agreement</button>
+          <a href="https://georain.github.io/EnglishWorld" target="_blank" rel="noreferrer">Official site</a>
+        </div>
+      </div>
+    </footer>
+
+    <div class="modal hidden" id="policyModal" aria-hidden="true">
+      <div class="modal-backdrop" data-close="true"></div>
+      <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="policyTitle">
+        <button class="modal-close" type="button" aria-label="Close policy dialog">×</button>
+        <div class="modal-content">
+          <p class="eyebrow">EnglishWorld</p>
+          <h3 id="policyTitle">Privacy Policy & User Agreement</h3>
+          <div id="policyContent"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

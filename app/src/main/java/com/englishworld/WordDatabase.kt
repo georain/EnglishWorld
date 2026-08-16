@@ -2,130 +2,386 @@ package com.englishworld
 
 import android.content.Context
 
-class WordDatabase(private val context: Context) {
-    
-    // 小学英语单词（部分示例）
-    private val primarySchoolWords = listOf(
-        Word("apple", "/ˈæpl/", "苹果", "I eat an apple every day.", "小学"),
-        Word("book", "/bʊk/", "书", "This is a good book.", "小学"),
-        Word("cat", "/kæt/", "猫", "The cat is cute.", "小学"),
-        Word("dog", "/dɒɡ/", "狗", "I have a pet dog.", "小学"),
-        Word("egg", "/eɡ/", "蛋", "I have an egg for breakfast.", "小学"),
-        Word("fish", "/fɪʃ/", "鱼", "Fish can swim.", "小学"),
-        Word("girl", "/ɡɜːl/", "女孩", "She is a nice girl.", "小学"),
-        Word("hand", "/hænd/", "手", "Raise your hand.", "小学"),
-        Word("ice", "/aɪs/", "冰", "The ice is cold.", "小学"),
-        Word("juice", "/dʒuːs/", "果汁", "I drink orange juice.", "小学"),
-        Word("key", "/kiː/", "钥匙", "This is my key.", "小学"),
-        Word("lion", "/ˈlaɪən/", "狮子", "The lion is strong.", "小学"),
-        Word("moon", "/muːn/", "月亮", "Look at the moon.", "小学"),
-        Word("nose", "/nəʊz/", "鼻子", "I have a small nose.", "小学"),
-        Word("orange", "/ˈɒrɪndʒ/", "橙子；橙色", "I like oranges.", "小学"),
-        Word("pen", "/pen/", "钢笔", "Use a pen to write.", "小学"),
-        Word("queen", "/kwiːn/", "女王", "The queen is kind.", "小学"),
-        Word("rain", "/reɪn/", "雨", "It is raining.", "小学"),
-        Word("sun", "/sʌn/", "太阳", "The sun is bright.", "小学"),
-        Word("tree", "/triː/", "树", "Plant more trees.", "小学"),
-        Word("umbrella", "/ʌmˈbrelə/", "雨伞", "Take an umbrella.", "小学"),
-        Word("violin", "/ˌvaɪəˈlɪn/", "小提琴", "She plays the violin.", "小学"),
-        Word("water", "/ˈwɔːtə(r)/", "水", "Drink more water.", "小学"),
-        Word("box", "/bɒks/", "盒子", "Put it in the box.", "小学"),
-        Word("yellow", "/ˈjeləʊ/", "黄色", "The banana is yellow.", "小学"),
-        Word("zoo", "/zuː/", "动物园", "Let's go to the zoo.", "小学"),
-        Word("school", "/skuːl/", "学校", "I go to school by bus.", "小学"),
-        Word("teacher", "/ˈtiːtʃə(r)/", "老师", "Our teacher is nice.", "小学"),
-        Word("student", "/ˈstjuːdnt/", "学生", "He is a good student.", "小学"),
-        Word("friend", "/frend/", "朋友", "She is my best friend.", "小学"),
-        Word("family", "/ˈfæmɪli/", "家庭", "I love my family.", "小学"),
-        Word("mother", "/ˈmʌðə(r)/", "妈妈", "My mother cooks well.", "小学"),
-        Word("father", "/ˈfɑːðə(r)/", "爸爸", "My father is tall.", "小学"),
-        Word("happy", "/ˈhæpi/", "快乐的", "I am very happy.", "小学"),
-        Word("big", "/bɪɡ/", "大的", "The elephant is big.", "小学"),
-        Word("small", "/smɔːl/", "小的", "The cat is small.", "小学"),
-        Word("good", "/ɡʊd/", "好的", "You are a good boy.", "小学"),
-        Word("bad", "/bæd/", "坏的", "Don't be bad.", "小学"),
-        Word("red", "/red/", "红色", "The apple is red.", "小学"),
-        Word("blue", "/bluː/", "蓝色", "The sky is blue.", "小学"),
-        Word("green", "/ɡriːn/", "绿色", "Grass is green.", "小学"),
-        Word("one", "/wʌn/", "一", "I have one book.", "小学"),
-        Word("two", "/tuː/", "二", "I have two hands.", "小学"),
-        Word("three", "/θriː/", "三", "Count to three.", "小学")
-    )
-    
-    // 初中英语单词（部分示例）
-    private val middleSchoolWords = listOf(
-        Word("ability", "/əˈbɪləti/", "能力，才能", "She has the ability to solve problems.", "初中"),
-        Word("achieve", "/əˈtʃiːv/", "达到，完成", "Work hard to achieve your goals.", "初中"),
-        Word("advantage", "/ədˈvɑːntɪdʒ/", "优势，优点", "What are the advantages?", "初中"),
-        Word("beautiful", "/ˈbjuːtɪfl/", "美丽的", "The flower is beautiful.", "初中"),
-        Word("believe", "/bɪˈliːv/", "相信", "I believe in you.", "初中"),
-        Word("challenge", "/ˈtʃælɪndʒ/", "挑战", "Face the challenge bravely.", "初中"),
-        Word("communicate", "/kəˈmjuːnɪkeɪt/", "交流，沟通", "We need to communicate more.", "初中"),
-        Word("decision", "/dɪˈsɪʒn/", "决定", "Make a wise decision.", "初中"),
-        Word("environment", "/ɪnˈvaɪrənmənt/", "环境", "Protect our environment.", "初中"),
-        Word("experience", "/ɪkˈspɪəriəns/", "经验，经历", "Learn from experience.", "初中"),
-        Word("famous", "/ˈfeɪməs/", "著名的", "He is a famous writer.", "初中"),
-        Word("government", "/ˈɡʌvənmənt/", "政府", "The government helps people.", "初中"),
-        Word("happiness", "/ˈhæpinəs/", "幸福，快乐", "Money cannot buy happiness.", "初中"),
-        Word("important", "/ɪmˈpɔːtnt/", "重要的", "Health is important.", "初中"),
-        Word("knowledge", "/ˈnɒlɪdʒ/", "知识", "Knowledge is power.", "初中"),
-        Word("language", "/ˈlæŋɡwɪdʒ/", "语言", "English is a global language.", "初中"),
-        Word("memory", "/ˈmeməri/", "记忆，记忆力", "I have a good memory.", "初中"),
-        Word("necessary", "/ˈnesəsəri/", "必要的", "It is necessary to study hard.", "初中"),
-        Word("opportunity", "/ˌɒpəˈtjuːnəti/", "机会", "Seize every opportunity.", "初中"),
-        Word("practice", "/ˈpræktɪs/", "练习", "Practice makes perfect.", "初中"),
-        Word("question", "/ˈkwestʃən/", "问题", "Do you have any questions?", "初中"),
-        Word("remember", "/rɪˈmembə(r)/", "记住", "Remember to call me.", "初中"),
-        Word("success", "/səkˈses/", "成功", "Wish you success!", "初中"),
-        Word("technology", "/tekˈnɒlədʒi/", "技术", "Technology changes our lives.", "初中"),
-        Word("understand", "/ˌʌndəˈstænd/", "理解", "I understand your feeling.", "初中"),
-        Word("volunteer", "/ˌvɒlənˈtɪə(r)/", "志愿者", "She works as a volunteer.", "初中"),
-        Word("weather", "/ˈweðə(r)/", "天气", "How's the weather today?", "初中"),
-        Word("excellent", "/ˈeksələnt/", "优秀的", "Your work is excellent.", "初中"),
-        Word("favorite", "/ˈfeɪvərɪt/", "最喜欢的", "What's your favorite color?", "初中"),
-        Word("different", "/ˈdɪfrənt/", "不同的", "We are different but equal.", "初中"),
-        Word("difficult", "/ˈdɪfɪkəlt/", "困难的", "The exam was difficult.", "初中"),
-        Word("possible", "/ˈpɒsəbl/", "可能的", "Everything is possible.", "初中"),
-        Word("impossible", "/ɪmˈpɒsəbl/", "不可能的", "Nothing is impossible.", "初中"),
-        Word("comfortable", "/ˈkʌmftəbl/", "舒适的", "The chair is comfortable.", "初中"),
-        Word("popular", "/ˈpɒpjələ(r)/", "流行的", "This song is very popular.", "初中"),
-        Word("dangerous", "/ˈdeɪndʒərəs/", "危险的", "It's dangerous to swim alone.", "初中"),
-        Word("expensive", "/ɪkˈspensɪv/", "昂贵的", "This car is too expensive.", "初中"),
-        Word("interesting", "/ˈɪntrəstɪŋ/", "有趣的", "The story is interesting.", "初中"),
-        Word("wonderful", "/ˈwʌndəfl/", "精彩的", "We had a wonderful time.", "初中"),
-        Word("attention", "/əˈtenʃn/", "注意", "Pay attention to the teacher.", "初中"),
-        Word("information", "/ˌɪnfəˈmeɪʃn/", "信息", "Can I get some information?", "初中"),
-        Word("education", "/ˌedʒuˈkeɪʃn/", "教育", "Education is important.", "初中"),
-        Word("development", "/dɪˈveləpmənt/", "发展", "China's development is fast.", "初中"),
-        Word("traditional", "/trəˈdɪʃənl/", "传统的", "It's a traditional festival.", "初中"),
-        Word("international", "/ˌɪntəˈnæʃənl/", "国际的", "It's an international airport.", "初中")
+/**
+ * 英语单词词库
+ * 数据来源：小学 / 初中 / 高中阶段教学大纲常用词汇整理，全部为真实单词数据。
+ */
+class WordDatabase(context: Context) {
+
+    private val allWords: List<Word> = buildList {
+        addAll(primarySchoolWords)
+        addAll(middleSchoolWords)
+        addAll(highSchoolWords)
+    }
+
+    /** 按等级获取单词列表 */
+    fun getWordsByLevel(level: String): List<Word> = when (level) {
+        LEVEL_PRIMARY -> primarySchoolWords
+        LEVEL_MIDDLE -> middleSchoolWords
+        LEVEL_HIGH -> highSchoolWords
+        else -> emptyList()
+    }
+
+    /** 获取全部单词 */
+    fun getAllWords(): List<Word> = allWords
+
+    /** 单词总数 */
+    fun getTotalCount(): Int = allWords.size
+
+    /** 精确查询（支持中英文，先匹配英文单词，再匹配中文释义） */
+    fun searchWord(query: String): Word? {
+        val q = query.trim()
+        if (q.isEmpty()) return null
+        allWords.find { it.word.equals(q, ignoreCase = true) }?.let { return it }
+        return allWords.find { it.meaning.contains(q) }
+    }
+
+    /** 模糊搜索（支持英文前缀/包含、中文释义、音标），按相关度排序 */
+    fun searchWords(query: String): List<Word> {
+        val q = query.trim()
+        if (q.isEmpty()) return emptyList()
+        val lower = q.lowercase()
+        return allWords.filter {
+            it.word.lowercase().contains(lower) ||
+                it.meaning.contains(q) ||
+                it.phonetic.contains(q)
+        }
+    }
+
+    /** 根据单词查找完整信息 */
+    fun findByWord(word: String): Word? =
+        allWords.find { it.word.equals(word, ignoreCase = true) }
+
+    companion object {
+        const val LEVEL_PRIMARY = "小学"
+        const val LEVEL_MIDDLE = "初中"
+        const val LEVEL_HIGH = "高中"
+    }
+
+    // ==================== 小学词汇（基础入门） ====================
+    private val primarySchoolWords: List<Word> = listOf(
+        Word("hello", "/həˈləʊ/", "int. 你好；喂（打招呼用语）", "Hello, how are you? 你好，你好吗？", "小学"),
+        Word("hi", "/haɪ/", "int. 嗨（非正式问候语）", "Hi, nice to meet you! 嗨，很高兴见到你！", "小学"),
+        Word("world", "/wɜːld/", "n. 世界", "The world is big and beautiful. 世界广阔而美丽。", "小学"),
+        Word("study", "/ˈstʌdi/", "v. 学习；研究  n. 书房", "I study English every day. 我每天学习英语。", "小学"),
+        Word("learn", "/lɜːn/", "v. 学习；学会", "We learn new words at school. 我们在学校学习新单词。", "小学"),
+        Word("love", "/lʌv/", "v./n. 爱；热爱", "I love my family. 我爱我的家人。", "小学"),
+        Word("good", "/ɡʊd/", "adj. 好的；优秀的", "She is a good student. 她是一名好学生。", "小学"),
+        Word("morning", "/ˈmɔːnɪŋ/", "n. 早晨；上午", "Good morning, teacher! 老师早上好！", "小学"),
+        Word("evening", "/ˈiːvnɪŋ/", "n. 傍晚；晚上", "We watch TV in the evening. 我们晚上看电视。", "小学"),
+        Word("night", "/naɪt/", "n. 夜晚", "Good night, mum. 晚安，妈妈。", "小学"),
+        Word("today", "/təˈdeɪ/", "n./adv. 今天", "Today is sunny. 今天是晴天。", "小学"),
+        Word("tomorrow", "/təˈmɒrəʊ/", "n./adv. 明天", "See you tomorrow. 明天见。", "小学"),
+        Word("yesterday", "/ˈjestədeɪ/", "n./adv. 昨天", "It rained yesterday. 昨天下雨了。", "小学"),
+        Word("happy", "/ˈhæpi/", "adj. 快乐的；幸福的", "I am happy today. 我今天很开心。", "小学"),
+        Word("sad", "/sæd/", "adj. 悲伤的；难过的", "Don't be sad. 别难过。", "小学"),
+        Word("big", "/bɪɡ/", "adj. 大的", "The elephant is big. 大象很大。", "小学"),
+        Word("small", "/smɔːl/", "adj. 小的", "The mouse is small. 老鼠很小。", "小学"),
+        Word("tall", "/tɔːl/", "adj. 高的", "My father is tall. 我爸爸个子高。", "小学"),
+        Word("short", "/ʃɔːt/", "adj. 矮的；短的", "The pencil is short. 这支铅笔很短。", "小学"),
+        Word("fast", "/fɑːst/", "adj./adv. 快的；迅速地", "The train is very fast. 火车非常快。", "小学"),
+        Word("slow", "/sləʊ/", "adj. 慢的", "The turtle is slow. 乌龟爬得很慢。", "小学"),
+        Word("hot", "/hɒt/", "adj. 热的；辣的", "Summer is hot. 夏天很热。", "小学"),
+        Word("cold", "/kəʊld/", "adj. 冷的  n. 感冒", "It's cold today. 今天很冷。", "小学"),
+        Word("new", "/njuː/", "adj. 新的", "I have a new bag. 我有一个新书包。", "小学"),
+        Word("old", "/əʊld/", "adj. 旧的；年老的", "This is an old book. 这是一本旧书。", "小学"),
+        Word("apple", "/ˈæpl/", "n. 苹果", "An apple a day keeps the doctor away. 一天一苹果，医生远离我。", "小学"),
+        Word("banana", "/bəˈnɑːnə/", "n. 香蕉", "The monkey likes bananas. 猴子喜欢吃香蕉。", "小学"),
+        Word("orange", "/ˈɒrɪndʒ/", "n. 橙子；橙色", "I drink orange juice. 我喝橙汁。", "小学"),
+        Word("pear", "/peə(r)/", "n. 梨", "This pear is sweet. 这个梨很甜。", "小学"),
+        Word("water", "/ˈwɔːtə(r)/", "n. 水", "Please drink more water. 请多喝水。", "小学"),
+        Word("milk", "/mɪlk/", "n. 牛奶", "I drink milk every morning. 我每天早上喝牛奶。", "小学"),
+        Word("bread", "/bred/", "n. 面包", "I eat bread for breakfast. 我早餐吃面包。", "小学"),
+        Word("rice", "/raɪs/", "n. 米饭；大米", "We eat rice for lunch. 我们午餐吃米饭。", "小学"),
+        Word("egg", "/eɡ/", "n. 鸡蛋", "I have an egg and some milk. 我吃一个鸡蛋并喝些牛奶。", "小学"),
+        Word("fish", "/fɪʃ/", "n. 鱼；鱼肉", "Fish can swim in the water. 鱼能在水里游。", "小学"),
+        Word("meat", "/miːt/", "n. 肉", "I like eating meat. 我喜欢吃肉。", "小学"),
+        Word("cat", "/kæt/", "n. 猫", "The cat is sleeping. 猫在睡觉。", "小学"),
+        Word("dog", "/dɒɡ/", "n. 狗", "The dog runs very fast. 这只狗跑得很快。", "小学"),
+        Word("bird", "/bɜːd/", "n. 鸟", "The bird is singing in the tree. 鸟儿在树上唱歌。", "小学"),
+        Word("rabbit", "/ˈræbɪt/", "n. 兔子", "The rabbit has long ears. 兔子有长长的耳朵。", "小学"),
+        Word("monkey", "/ˈmʌŋki/", "n. 猴子", "The monkey is climbing the tree. 猴子在爬树。", "小学"),
+        Word("tiger", "/ˈtaɪɡə(r)/", "n. 老虎", "The tiger is the king of the forest. 老虎是森林之王。", "小学"),
+        Word("lion", "/ˈlaɪən/", "n. 狮子", "The lion is strong. 狮子很强壮。", "小学"),
+        Word("elephant", "/ˈelɪfənt/", "n. 大象", "The elephant has a long nose. 大象有长长的鼻子。", "小学"),
+        Word("panda", "/ˈpændə/", "n. 熊猫", "The panda eats bamboo. 熊猫吃竹子。", "小学"),
+        Word("book", "/bʊk/", "n. 书", "I like reading books. 我喜欢读书。", "小学"),
+        Word("pen", "/pen/", "n. 钢笔", "This pen is blue. 这支钢笔是蓝色的。", "小学"),
+        Word("pencil", "/ˈpensl/", "n. 铅笔", "I write with a pencil. 我用铅笔写字。", "小学"),
+        Word("ruler", "/ˈruːlə(r)/", "n. 尺子；统治者", "My ruler is long. 我的尺子很长。", "小学"),
+        Word("bag", "/bæɡ/", "n. 包；书包", "My bag is heavy. 我的书包很重。", "小学"),
+        Word("desk", "/desk/", "n. 书桌", "There is a book on the desk. 书桌上有一本书。", "小学"),
+        Word("chair", "/tʃeə(r)/", "n. 椅子", "Sit on the chair, please. 请坐在椅子上。", "小学"),
+        Word("school", "/skuːl/", "n. 学校", "We go to school by bus. 我们坐公交车上学。", "小学"),
+        Word("teacher", "/ˈtiːtʃə(r)/", "n. 老师", "Our teacher is kind. 我们的老师很和蔼。", "小学"),
+        Word("student", "/ˈstjuːdnt/", "n. 学生", "He is a good student. 他是个好学生。", "小学"),
+        Word("friend", "/frend/", "n. 朋友", "She is my best friend. 她是我最好的朋友。", "小学"),
+        Word("family", "/ˈfæmɪli/", "n. 家庭；家人", "I love my family. 我爱我的家人。", "小学"),
+        Word("mother", "/ˈmʌðə(r)/", "n. 母亲；妈妈", "My mother cooks delicious food. 我妈妈做菜很好吃。", "小学"),
+        Word("father", "/ˈfɑːðə(r)/", "n. 父亲；爸爸", "My father is a doctor. 我爸爸是一名医生。", "小学"),
+        Word("brother", "/ˈbrʌðə(r)/", "n. 兄弟", "My brother is ten years old. 我弟弟十岁了。", "小学"),
+        Word("sister", "/ˈsɪstə(r)/", "n. 姐妹", "My sister likes singing. 我姐姐喜欢唱歌。", "小学"),
+        Word("red", "/red/", "n./adj. 红色（的）", "The apple is red. 苹果是红色的。", "小学"),
+        Word("blue", "/bluː/", "n./adj. 蓝色（的）", "The sky is blue. 天空是蓝色的。", "小学"),
+        Word("green", "/ɡriːn/", "n./adj. 绿色（的）", "The grass is green. 草是绿色的。", "小学"),
+        Word("yellow", "/ˈjeləʊ/", "n./adj. 黄色（的）", "The banana is yellow. 香蕉是黄色的。", "小学"),
+        Word("black", "/blæk/", "n./adj. 黑色（的）", "My pen is black. 我的钢笔是黑色的。", "小学"),
+        Word("white", "/waɪt/", "n./adj. 白色（的）", "The snow is white. 雪是白色的。", "小学"),
+        Word("one", "/wʌn/", "num. 一", "I have one apple. 我有一个苹果。", "小学"),
+        Word("two", "/tuː/", "num. 二", "I have two hands. 我有两只手。", "小学"),
+        Word("three", "/θriː/", "num. 三", "There are three birds. 有三只鸟。", "小学"),
+        Word("four", "/fɔː(r)/", "num. 四", "There are four seasons. 一年有四个季节。", "小学"),
+        Word("five", "/faɪv/", "num. 五", "I have five fingers. 我有五个手指。", "小学"),
+        Word("six", "/sɪks/", "num. 六", "I get up at six. 我六点起床。", "小学"),
+        Word("seven", "/ˈsevn/", "num. 七", "There are seven days in a week. 一周有七天。", "小学"),
+        Word("eight", "/eɪt/", "num. 八", "I am eight years old. 我八岁了。", "小学"),
+        Word("nine", "/naɪn/", "num. 九", "I have nine pencils. 我有九支铅笔。", "小学"),
+        Word("ten", "/ten/", "num. 十", "I can count to ten. 我能数到十。", "小学"),
+        Word("run", "/rʌn/", "v. 跑；奔跑", "I run in the park. 我在公园里跑步。", "小学"),
+        Word("jump", "/dʒʌmp/", "v. 跳；跳跃", "The rabbit can jump. 兔子会跳。", "小学"),
+        Word("walk", "/wɔːk/", "v. 走路；散步", "We walk to school. 我们步行去学校。", "小学"),
+        Word("swim", "/swɪm/", "v. 游泳", "I can swim in the river. 我会在河里游泳。", "小学"),
+        Word("sing", "/sɪŋ/", "v. 唱歌", "She can sing very well. 她唱歌很好听。", "小学"),
+        Word("dance", "/dɑːns/", "v. 跳舞", "They dance happily. 他们开心地跳舞。", "小学"),
+        Word("read", "/riːd/", "v. 阅读；朗读", "I read books every day. 我每天读书。", "小学"),
+        Word("write", "/raɪt/", "v. 写；写字", "Please write your name. 请写下你的名字。", "小学"),
+        Word("draw", "/drɔː/", "v. 画画；绘制", "I like drawing pictures. 我喜欢画画。", "小学"),
+        Word("play", "/pleɪ/", "v. 玩；玩耍；演奏", "We play games together. 我们一起玩游戏。", "小学"),
+        Word("eat", "/iːt/", "v. 吃", "I eat an apple. 我吃一个苹果。", "小学"),
+        Word("drink", "/drɪŋk/", "v. 喝  n. 饮料", "I drink some water. 我喝一些水。", "小学"),
+        Word("sleep", "/sliːp/", "v. 睡觉", "I sleep at ten o'clock. 我十点睡觉。", "小学"),
+        Word("open", "/ˈəʊpən/", "v. 打开  adj. 开着的", "Open the window, please. 请打开窗户。", "小学"),
+        Word("close", "/kləʊz/", "v. 关闭  adj. 近的", "Close the door, please. 请关门。", "小学"),
+        Word("sun", "/sʌn/", "n. 太阳", "The sun rises in the east. 太阳从东方升起。", "小学"),
+        Word("moon", "/muːn/", "n. 月亮", "The moon is bright tonight. 今晚的月亮很亮。", "小学"),
+        Word("star", "/stɑː(r)/", "n. 星星；明星", "I can see stars at night. 我晚上能看到星星。", "小学"),
+        Word("sky", "/skaɪ/", "n. 天空", "The sky is clear today. 今天天空晴朗。", "小学"),
+        Word("rain", "/reɪn/", "n./v. 雨；下雨", "It often rains in spring. 春天经常下雨。", "小学"),
+        Word("snow", "/snəʊ/", "n./v. 雪；下雪", "It snows in winter. 冬天下雪。", "小学"),
+        Word("wind", "/wɪnd/", "n. 风", "The wind is blowing. 风在吹。", "小学"),
+        Word("tree", "/triː/", "n. 树", "The tree is very tall. 这棵树很高。", "小学"),
+        Word("flower", "/ˈflaʊə(r)/", "n. 花；花朵", "The flowers are beautiful. 这些花很漂亮。", "小学"),
+        Word("grass", "/ɡrɑːs/", "n. 草；草地", "Don't walk on the grass. 不要踩踏草地。", "小学"),
     )
 
-    fun searchWord(query: String): Word? {
-        val allWords = primarySchoolWords + middleSchoolWords
-        return allWords.find { 
-            it.word.equals(query, ignoreCase = true) || 
-            it.word.startsWith(query, ignoreCase = true)
-        }
-    }
-    
-    fun searchWords(query: String): List<Word> {
-        val allWords = primarySchoolWords + middleSchoolWords
-        return allWords.filter { 
-            it.word.contains(query, ignoreCase = true) ||
-            it.meaning.contains(query)
-        }.take(20)
-    }
-    
-    fun getWordsByLevel(level: String): List<Word> {
-        return when (level) {
-            "小学" -> primarySchoolWords
-            "初中" -> middleSchoolWords
-            else -> primarySchoolWords + middleSchoolWords
-        }
-    }
-    
-    fun getAllWords(): List<Word> {
-        return primarySchoolWords + middleSchoolWords
-    }
+    // ==================== 初中词汇（核心进阶） ====================
+    private val middleSchoolWords: List<Word> = listOf(
+        Word("about", "/əˈbaʊt/", "prep. 关于  adv. 大约", "Tell me about your school. 给我讲讲你的学校。", "初中"),
+        Word("after", "/ˈɑːftə(r)/", "prep. 在……之后", "I play basketball after school. 放学后我打篮球。", "初中"),
+        Word("again", "/əˈɡen/", "adv. 再一次；又", "Please say it again. 请再说一遍。", "初中"),
+        Word("answer", "/ˈɑːnsə(r)/", "v./n. 回答；答案", "Please answer my question. 请回答我的问题。", "初中"),
+        Word("ask", "/ɑːsk/", "v. 问；请求", "May I ask a question? 我可以问一个问题吗？", "初中"),
+        Word("beautiful", "/ˈbjuːtɪfl/", "adj. 美丽的；漂亮的", "What a beautiful garden! 多么美丽的花园！", "初中"),
+        Word("begin", "/bɪˈɡɪn/", "v. 开始", "The class begins at eight. 八点开始上课。", "初中"),
+        Word("believe", "/bɪˈliːv/", "v. 相信；认为", "I believe you can do it. 我相信你能做到。", "初中"),
+        Word("between", "/bɪˈtwiːn/", "prep. 在……之间", "The cat sits between two chairs. 猫坐在两把椅子之间。", "初中"),
+        Word("borrow", "/ˈbɒrəʊ/", "v. 借入", "Can I borrow your pen? 我能借用你的钢笔吗？", "初中"),
+        Word("breakfast", "/ˈbrekfəst/", "n. 早餐", "I have breakfast at seven. 我七点吃早餐。", "初中"),
+        Word("bring", "/brɪŋ/", "v. 带来", "Please bring your homework. 请带上你的作业。", "初中"),
+        Word("busy", "/ˈbɪzi/", "adj. 忙碌的", "My mother is busy cooking. 我妈妈正忙着做饭。", "初中"),
+        Word("careful", "/ˈkeəfl/", "adj. 小心的；仔细的", "Be careful when you cross the road. 过马路时要小心。", "初中"),
+        Word("change", "/tʃeɪndʒ/", "v./n. 改变；零钱", "The weather changes quickly. 天气变化很快。", "初中"),
+        Word("cheap", "/tʃiːp/", "adj. 便宜的", "This shirt is cheap. 这件衬衫很便宜。", "初中"),
+        Word("choose", "/tʃuːz/", "v. 选择", "Please choose a book. 请选一本书。", "初中"),
+        Word("clean", "/kliːn/", "adj. 干净的  v. 打扫", "Keep the room clean. 保持房间干净。", "初中"),
+        Word("climb", "/klaɪm/", "v. 爬；攀登", "They climb the mountain. 他们爬山。", "初中"),
+        Word("cloudy", "/ˈklaʊdi/", "adj. 多云的；阴天的", "It's cloudy today. 今天多云。", "初中"),
+        Word("cook", "/kʊk/", "v. 烹饪  n. 厨师", "My father cooks dinner. 我爸爸做晚饭。", "初中"),
+        Word("country", "/ˈkʌntri/", "n. 国家；乡村", "China is a big country. 中国是一个大国。", "初中"),
+        Word("dangerous", "/ˈdeɪndʒərəs/", "adj. 危险的", "Swimming here is dangerous. 在这里游泳很危险。", "初中"),
+        Word("decide", "/dɪˈsaɪd/", "v. 决定", "I decide to study hard. 我决定努力学习。", "初中"),
+        Word("different", "/ˈdɪfrənt/", "adj. 不同的", "We are in different classes. 我们在不同的班级。", "初中"),
+        Word("difficult", "/ˈdɪfɪkəlt/", "adj. 困难的", "This question is difficult. 这个问题很难。", "初中"),
+        Word("dinner", "/ˈdɪnə(r)/", "n. 晚餐；正餐", "We have dinner at six. 我们六点吃晚饭。", "初中"),
+        Word("early", "/ˈɜːli/", "adj./adv. 早的；提前", "I get up early every day. 我每天早起。", "初中"),
+        Word("easy", "/ˈiːzi/", "adj. 容易的；简单的", "This problem is easy. 这个问题很简单。", "初中"),
+        Word("every", "/ˈevri/", "adj. 每一个", "I read English every day. 我每天读英语。", "初中"),
+        Word("excellent", "/ˈeksələnt/", "adj. 极好的；优秀的", "Your answer is excellent. 你的回答非常棒。", "初中"),
+        Word("exercise", "/ˈeksəsaɪz/", "n./v. 锻炼；练习", "I exercise in the morning. 我早上锻炼。", "初中"),
+        Word("expensive", "/ɪkˈspensɪv/", "adj. 昂贵的", "This watch is expensive. 这块手表很贵。", "初中"),
+        Word("favorite", "/ˈfeɪvərɪt/", "adj. 最喜爱的", "My favorite color is blue. 我最喜欢的颜色是蓝色。", "初中"),
+        Word("finish", "/ˈfɪnɪʃ/", "v. 完成；结束", "I finish my homework. 我完成了作业。", "初中"),
+        Word("foreign", "/ˈfɒrən/", "adj. 外国的", "She can speak foreign languages. 她会说外语。", "初中"),
+        Word("forget", "/fəˈɡet/", "v. 忘记", "Don't forget your keys. 别忘了你的钥匙。", "初中"),
+        Word("healthy", "/ˈhelθi/", "adj. 健康的", "Eating vegetables keeps us healthy. 吃蔬菜使我们健康。", "初中"),
+        Word("helpful", "/ˈhelpfl/", "adj. 有帮助的", "The dictionary is very helpful. 这本词典很有帮助。", "初中"),
+        Word("history", "/ˈhɪstri/", "n. 历史", "I like learning history. 我喜欢学历史。", "初中"),
+        Word("holiday", "/ˈhɒlədeɪ/", "n. 假日；假期", "We are on holiday next week. 我们下周放假。", "初中"),
+        Word("hospital", "/ˈhɒspɪtl/", "n. 医院", "My aunt works in a hospital. 我姑姑在医院工作。", "初中"),
+        Word("important", "/ɪmˈpɔːtnt/", "adj. 重要的", "English is very important. 英语非常重要。", "初中"),
+        Word("interesting", "/ˈɪntrəstɪŋ/", "adj. 有趣的", "This story is interesting. 这个故事很有趣。", "初中"),
+        Word("library", "/ˈlaɪbrəri/", "n. 图书馆", "There are many books in the library. 图书馆里有很多书。", "初中"),
+        Word("light", "/laɪt/", "n. 光；灯  adj. 轻的", "The box is light. 这个箱子很轻。", "初中"),
+        Word("listen", "/ˈlɪsn/", "v. 听；倾听", "Listen to the teacher carefully. 认真听老师讲课。", "初中"),
+        Word("modern", "/ˈmɒdn/", "adj. 现代的；新式的", "This is a modern city. 这是一座现代化城市。", "初中"),
+        Word("museum", "/mjuˈziːəm/", "n. 博物馆", "We visit the museum on Sunday. 我们星期天参观博物馆。", "初中"),
+        Word("necessary", "/ˈnesəsəri/", "adj. 必要的；必需的", "It's necessary to sleep well. 睡好觉很有必要。", "初中"),
+        Word("notice", "/ˈnəʊtɪs/", "v. 注意到  n. 通知", "Did you notice the sign? 你注意到那个标志了吗？", "初中"),
+        Word("often", "/ˈɒfn/", "adv. 经常；常常", "I often play football. 我经常踢足球。", "初中"),
+        Word("practise", "/ˈpræktɪs/", "v. 练习；实践", "Practise makes perfect. 熟能生巧。", "初中"),
+        Word("prepare", "/prɪˈpeə(r)/", "v. 准备", "We prepare for the exam. 我们为考试做准备。", "初中"),
+        Word("problem", "/ˈprɒbləm/", "n. 问题；难题", "I have a math problem. 我有一道数学难题。", "初中"),
+        Word("promise", "/ˈprɒmɪs/", "v./n. 承诺；许诺", "I promise to come back. 我保证回来。", "初中"),
+        Word("protect", "/prəˈtekt/", "v. 保护", "We should protect the environment. 我们应该保护环境。", "初中"),
+        Word("remember", "/rɪˈmembə(r)/", "v. 记得；记住", "Remember to close the door. 记得关门。", "初中"),
+        Word("restaurant", "/ˈrestrɒnt/", "n. 餐馆；饭店", "We eat out in a restaurant. 我们在餐馆吃饭。", "初中"),
+        Word("scientist", "/ˈsaɪəntɪst/", "n. 科学家", "The scientist makes an invention. 这位科学家做出一项发明。", "初中"),
+        Word("shopping", "/ˈʃɒpɪŋ/", "n. 购物", "My mother goes shopping on weekends. 我妈妈周末去购物。", "初中"),
+        Word("solve", "/sɒlv/", "v. 解决；解答", "Let's solve this problem together. 让我们一起解决这个问题。", "初中"),
+        Word("spend", "/spend/", "v. 花费；度过", "I spend two hours reading. 我花两小时读书。", "初中"),
+        Word("successful", "/səkˈsesfl/", "adj. 成功的", "She is a successful writer. 她是一位成功的作家。", "初中"),
+        Word("suggest", "/səˈdʒest/", "v. 建议；提议", "I suggest taking a walk. 我建议去散步。", "初中"),
+        Word("temperature", "/ˈtemprətʃə(r)/", "n. 温度；体温", "The temperature drops at night. 夜间温度下降。", "初中"),
+        Word("tired", "/ˈtaɪəd/", "adj. 疲劳的；累的", "I feel tired after running. 跑步后我感到疲惫。", "初中"),
+        Word("travel", "/ˈtrævl/", "v./n. 旅行", "I want to travel around the world. 我想环游世界。", "初中"),
+        Word("understand", "/ˌʌndəˈstænd/", "v. 理解；明白", "Now I understand the lesson. 现在我理解这课了。", "初中"),
+        Word("university", "/ˌjuːnɪˈvɜːsəti/", "n. 大学", "He studies at a famous university. 他在一所著名大学学习。", "初中"),
+        Word("vegetable", "/ˈvedʒtəbl/", "n. 蔬菜", "Eat more vegetables every day. 每天多吃蔬菜。", "初中"),
+        Word("weather", "/ˈweðə(r)/", "n. 天气", "The weather is nice today. 今天天气很好。", "初中"),
+    )
+
+    // ==================== 高中词汇（高阶拓展） ====================
+    private val highSchoolWords: List<Word> = listOf(
+        Word("abandon", "/əˈbændən/", "v. 放弃；抛弃", "Never abandon your dream. 永远不要放弃你的梦想。", "高中"),
+        Word("absorb", "/əbˈzɔːb/", "v. 吸收；使专心", "Plants absorb water from the soil. 植物从土壤中吸收水分。", "高中"),
+        Word("academic", "/ˌækəˈdemɪk/", "adj. 学术的；学业的", "His academic performance is excellent. 他的学业成绩非常优秀。", "高中"),
+        Word("achieve", "/əˈtʃiːv/", "v. 实现；达到", "You can achieve your goals with effort. 通过努力你可以实现目标。", "高中"),
+        Word("adapt", "/əˈdæpt/", "v. 适应；改编", "It takes time to adapt to a new place. 适应新环境需要时间。", "高中"),
+        Word("adequate", "/ˈædɪkwət/", "adj. 足够的；充分的", "We need adequate time to prepare. 我们需要足够的时间来准备。", "高中"),
+        Word("advocate", "/ˈædvəkeɪt/", "v. 提倡；拥护  n. 倡导者", "They advocate a healthy lifestyle. 他们提倡健康的生活方式。", "高中"),
+        Word("ambition", "/æmˈbɪʃn/", "n. 抱负；雄心", "Her ambition is to be a doctor. 她的抱负是成为一名医生。", "高中"),
+        Word("analysis", "/əˈnæləsɪs/", "n. 分析；解析", "The analysis of the data took a week. 数据分析花了一周时间。", "高中"),
+        Word("anxiety", "/æŋˈzaɪəti/", "n. 焦虑；忧虑", "He felt anxiety before the exam. 考试前他感到焦虑。", "高中"),
+        Word("appreciate", "/əˈpriːʃieɪt/", "v. 感激；欣赏", "I really appreciate your help. 我非常感激你的帮助。", "高中"),
+        Word("approach", "/əˈprəʊtʃ/", "v. 接近  n. 方法；途径", "We need a new approach to the problem. 我们需要新方法解决这个问题。", "高中"),
+        Word("appropriate", "/əˈprəʊpriət/", "adj. 适当的；恰当的", "Wear appropriate clothes for the weather. 根据天气穿合适的衣服。", "高中"),
+        Word("approve", "/əˈpruːv/", "v. 批准；赞成", "The plan was approved by the manager. 计划得到了经理的批准。", "高中"),
+        Word("atmosphere", "/ˈætməsfɪə(r)/", "n. 大气；气氛", "The atmosphere in the room is warm. 房间里的气氛很温馨。", "高中"),
+        Word("available", "/əˈveɪləbl/", "adj. 可用的；可获得的", "Tickets are available online. 可以网上购票。", "高中"),
+        Word("aware", "/əˈweə(r)/", "adj. 意识到的；知道的", "Be aware of the potential risks. 要注意潜在的风险。", "高中"),
+        Word("benefit", "/ˈbenɪfɪt/", "n. 利益；好处  v. 有益于", "Exercise benefits our health. 锻炼有益于健康。", "高中"),
+        Word("budget", "/ˈbʌdʒɪt/", "n. 预算  v. 编预算", "We should keep to our budget. 我们应该控制在预算内。", "高中"),
+        Word("candidate", "/ˈkændɪdət/", "n. 候选人；应试者", "She is a strong candidate for the job. 她是这个职位的强力候选人。", "高中"),
+        Word("capacity", "/kəˈpæsəti/", "n. 容量；能力", "The hall has a capacity of 500. 这个大厅能容纳五百人。", "高中"),
+        Word("cautious", "/ˈkɔːʃəs/", "adj. 谨慎的；小心的", "Be cautious when investing money. 投资时要谨慎。", "高中"),
+        Word("celebrate", "/ˈselɪbreɪt/", "v. 庆祝", "We celebrate the New Year together. 我们一起庆祝新年。", "高中"),
+        Word("circumstance", "/ˈsɜːkəmstəns/", "n. 环境；情况", "Under no circumstance give up. 在任何情况下都不要放弃。", "高中"),
+        Word("climate", "/ˈklaɪmət/", "n. 气候", "The climate here is mild. 这里气候温和。", "高中"),
+        Word("community", "/kəˈmjuːnəti/", "n. 社区；团体", "They serve the local community. 他们为当地社区服务。", "高中"),
+        Word("compete", "/kəmˈpiːt/", "v. 竞争；比赛", "Many athletes compete in the games. 许多运动员在比赛中竞技。", "高中"),
+        Word("complex", "/ˈkɒmpleks/", "adj. 复杂的", "This is a complex question. 这是一个复杂的问题。", "高中"),
+        Word("concentrate", "/ˈkɒnsntreɪt/", "v. 集中；专心", "Please concentrate on your study. 请专心学习。", "高中"),
+        Word("concern", "/kənˈsɜːn/", "n. 关心；担忧  v. 涉及", "The matter concerns all of us. 这件事关系到我们所有人。", "高中"),
+        Word("conclude", "/kənˈkluːd/", "v. 得出结论；结束", "What can we conclude from the data? 从数据中我们能得出什么结论？", "高中"),
+        Word("confident", "/ˈkɒnfɪdənt/", "adj. 自信的；确信的", "Be confident in yourself. 要对自己有信心。", "高中"),
+        Word("consequence", "/ˈkɒnsɪkwəns/", "n. 后果；结果", "Think about the consequences first. 先想想后果。", "高中"),
+        Word("considerable", "/kənˈsɪdərəbl/", "adj. 相当大的；可观的", "It took considerable effort to finish. 完成它花了相当大的努力。", "高中"),
+        Word("constant", "/ˈkɒnstənt/", "adj. 持续的；不断的", "There is constant pressure at work. 工作中压力不断。", "高中"),
+        Word("consult", "/kənˈsʌlt/", "v. 咨询；查阅", "You should consult a doctor. 你应该咨询医生。", "高中"),
+        Word("contribute", "/kənˈtrɪbjuːt/", "v. 贡献；捐助", "Everyone can contribute to society. 每个人都能为社会做贡献。", "高中"),
+        Word("convenient", "/kənˈviːniənt/", "adj. 方便的", "Online shopping is very convenient. 网上购物非常方便。", "高中"),
+        Word("convince", "/kənˈvɪns/", "v. 说服；使相信", "He convinced me to join the team. 他说服我加入团队。", "高中"),
+        Word("crisis", "/ˈkraɪsɪs/", "n. 危机；危急关头", "The company survived the crisis. 公司度过了危机。", "高中"),
+        Word("crucial", "/ˈkruːʃl/", "adj. 至关重要的", "Teamwork is crucial to success. 团队合作对成功至关重要。", "高中"),
+        Word("cultivate", "/ˈkʌltɪveɪt/", "v. 培养；耕作", "Reading cultivates the mind. 阅读陶冶心智。", "高中"),
+        Word("curiosity", "/ˌkjʊəriˈɒsəti/", "n. 好奇心", "Curiosity drives scientific discovery. 好奇心推动科学发现。", "高中"),
+        Word("dedicate", "/ˈdedɪkeɪt/", "v. 奉献；致力于", "She dedicates herself to education. 她致力于教育事业。", "高中"),
+        Word("democracy", "/dɪˈmɒkrəsi/", "n. 民主；民主制度", "Democracy is a form of government. 民主是一种政府形式。", "高中"),
+        Word("demonstrate", "/ˈdemənstreɪt/", "v. 证明；演示", "Let me demonstrate how it works. 让我演示它是如何运作的。", "高中"),
+        Word("despite", "/dɪˈspaɪt/", "prep. 尽管；不管", "Despite the rain, we went out. 尽管下雨，我们还是出去了。", "高中"),
+        Word("determine", "/dɪˈtɜːmɪn/", "v. 决定；决心", "Hard work determines your success. 努力决定你的成功。", "高中"),
+        Word("distinguish", "/dɪˈstɪŋɡwɪʃ/", "v. 区分；辨别", "Can you distinguish the two sounds? 你能区分这两种声音吗？", "高中"),
+        Word("diverse", "/daɪˈvɜːs/", "adj. 多样的；不同的", "The city has a diverse culture. 这座城市文化多样。", "高中"),
+        Word("domestic", "/dəˈmestɪk/", "adj. 国内的；家庭的", "Domestic travel is popular in summer. 夏天国内旅游很受欢迎。", "高中"),
+        Word("dynamic", "/daɪˈnæmɪk/", "adj. 动态的；有活力的", "She has a dynamic personality. 她性格充满活力。", "高中"),
+        Word("efficient", "/ɪˈfɪʃnt/", "adj. 高效的", "This machine is very efficient. 这台机器效率很高。", "高中"),
+        Word("elaborate", "/ɪˈlæbərət/", "adj. 精心制作的  v. 详细说明", "Please elaborate on your idea. 请详细说明你的想法。", "高中"),
+        Word("eliminate", "/ɪˈlɪmɪneɪt/", "v. 消除；排除", "We should eliminate the errors. 我们应该消除这些错误。", "高中"),
+        Word("embrace", "/ɪmˈbreɪs/", "v. 拥抱；欣然接受", "Embrace new challenges bravely. 勇敢地拥抱新的挑战。", "高中"),
+        Word("emerge", "/iˈmɜːdʒ/", "v. 出现；浮现", "New problems emerge every day. 每天都会出现新问题。", "高中"),
+        Word("emphasis", "/ˈemfəsɪs/", "n. 强调；重点", "The course puts emphasis on practice. 这门课程强调实践。", "高中"),
+        Word("encounter", "/ɪnˈkaʊntə(r)/", "v. 遭遇；遇到", "We may encounter difficulties on the way. 路上我们可能会遇到困难。", "高中"),
+        Word("enhance", "/ɪnˈhɑːns/", "v. 提高；增强", "Reading enhances your vocabulary. 阅读能扩大你的词汇量。", "高中"),
+        Word("enormous", "/ɪˈnɔːməs/", "adj. 巨大的；庞大的", "There is an enormous difference. 差别巨大。", "高中"),
+        Word("enthusiasm", "/ɪnˈθjuːziæzəm/", "n. 热情；热心", "She shows great enthusiasm for music. 她对音乐表现出极大的热情。", "高中"),
+        Word("essential", "/ɪˈsenʃl/", "adj. 必要的；本质的", "Water is essential for life. 水对生命至关重要。", "高中"),
+        Word("estimate", "/ˈestɪmeɪt/", "v./n. 估计；估价", "I estimate it will take two hours. 我估计需要两小时。", "高中"),
+        Word("evaluate", "/ɪˈvæljueɪt/", "v. 评价；评估", "We evaluate the results carefully. 我们仔细评估结果。", "高中"),
+        Word("evident", "/ˈevɪdənt/", "adj. 明显的；显然的", "It is evident that he is tired. 显然他累了。", "高中"),
+        Word("exaggerate", "/ɪɡˈzædʒəreɪt/", "v. 夸张；夸大", "Don't exaggerate the difficulty. 不要夸大困难。", "高中"),
+        Word("exceed", "/ɪkˈsiːd/", "v. 超过；超越", "The cost exceeds our budget. 费用超出了我们的预算。", "高中"),
+        Word("exhaust", "/ɪɡˈzɔːst/", "v. 使精疲力竭；耗尽", "The long journey exhausted me. 长途旅行使我精疲力竭。", "高中"),
+        Word("existence", "/ɪɡˈzɪstəns/", "n. 存在；生存", "We don't know the existence of it. 我们不知道它的存在。", "高中"),
+        Word("expand", "/ɪkˈspænd/", "v. 扩大；扩展", "The company plans to expand its business. 公司计划扩大业务。", "高中"),
+        Word("fascinate", "/ˈfæsɪneɪt/", "v. 使着迷", "Space always fascinates me. 太空总是令我着迷。", "高中"),
+        Word("flexible", "/ˈfleksəbl/", "adj. 灵活的；可变通的", "We need a flexible schedule. 我们需要灵活的时间安排。", "高中"),
+        Word("fluent", "/ˈfluːənt/", "adj. 流利的", "She speaks fluent English. 她英语说得很流利。", "高中"),
+        Word("foundation", "/faʊnˈdeɪʃn/", "n. 基础；基金会", "Grammar is the foundation of a language. 语法是语言的基础。", "高中"),
+        Word("fundamental", "/ˌfʌndəˈmentl/", "adj. 基本的；根本的", "Freedom is a fundamental right. 自由是一项基本权利。", "高中"),
+        Word("generate", "/ˈdʒenəreɪt/", "v. 产生；引起", "Solar panels generate electricity. 太阳能电池板发电。", "高中"),
+        Word("genuine", "/ˈdʒenjuɪn/", "adj. 真正的；真诚的", "She has a genuine smile. 她的笑容很真诚。", "高中"),
+        Word("global", "/ˈɡləʊbl/", "adj. 全球的", "Global warming is a serious issue. 全球变暖是个严重问题。", "高中"),
+        Word("guarantee", "/ˌɡærənˈtiː/", "v./n. 保证；担保", "We can guarantee quality. 我们能保证质量。", "高中"),
+        Word("harmony", "/ˈhɑːməni/", "n. 和谐；融洽", "We live in harmony with nature. 我们与自然和谐相处。", "高中"),
+        Word("hesitate", "/ˈhezɪteɪt/", "v. 犹豫；迟疑", "Don't hesitate to ask for help. 别犹豫，大胆求助。", "高中"),
+        Word("identify", "/aɪˈdentɪfaɪ/", "v. 识别；确认", "Can you identify the problem? 你能找出问题所在吗？", "高中"),
+        Word("illustrate", "/ˈɪləstreɪt/", "v. 举例说明；图解", "Let me illustrate with an example. 让我举个例子说明。", "高中"),
+        Word("implement", "/ˈɪmplɪment/", "v. 实施；执行", "We will implement the new policy. 我们将实施新政策。", "高中"),
+        Word("implication", "/ˌɪmplɪˈkeɪʃn/", "n. 含义；影响", "Think about the implications of your decision. 想想你的决定带来的影响。", "高中"),
+        Word("impressive", "/ɪmˈpresɪv/", "adj. 令人印象深刻的", "Her speech was impressive. 她的演讲令人印象深刻。", "高中"),
+        Word("inevitable", "/ɪnˈevɪtəbl/", "adj. 不可避免的", "Change is inevitable in life. 生活中变化不可避免。", "高中"),
+        Word("ingredient", "/ɪnˈɡriːdiənt/", "n. 成分；原料", "The ingredients are fresh. 这些食材很新鲜。", "高中"),
+        Word("innovation", "/ˌɪnəˈveɪʃn/", "n. 创新；革新", "Innovation drives progress. 创新推动进步。", "高中"),
+        Word("insight", "/ˈɪnsaɪt/", "n. 洞察力；见解", "The article offers deep insight. 这篇文章见解深刻。", "高中"),
+        Word("inspire", "/ɪnˈspaɪə(r)/", "v. 鼓舞；激发", "Her story inspires many people. 她的故事鼓舞了很多人。", "高中"),
+        Word("integrate", "/ˈɪntɪɡreɪt/", "v. 整合；融入", "We should integrate theory with practice. 我们应该把理论与实践结合。", "高中"),
+        Word("intellectual", "/ˌɪntəˈlektʃuəl/", "adj. 智力的  n. 知识分子", "Reading is an intellectual activity. 阅读是智力活动。", "高中"),
+        Word("intense", "/ɪnˈtens/", "adj. 强烈的；紧张的", "The competition is intense. 竞争很激烈。", "高中"),
+        Word("interpret", "/ɪnˈtɜːprɪt/", "v. 解释；口译", "How do you interpret this poem? 你如何解读这首诗？", "高中"),
+        Word("investigate", "/ɪnˈvestɪɡeɪt/", "v. 调查；研究", "The police investigate the case. 警方正在调查此案。", "高中"),
+        Word("justify", "/ˈdʒʌstɪfaɪ/", "v. 证明……正当；为……辩护", "Nothing can justify violence. 任何理由都不能为暴力开脱。", "高中"),
+        Word("maintain", "/meɪnˈteɪn/", "v. 维持；保养", "Exercise helps maintain good health. 锻炼有助于保持健康。", "高中"),
+        Word("motivate", "/ˈməʊtɪveɪt/", "v. 激励；激发", "A good teacher can motivate students. 好老师能激励学生。", "高中"),
+        Word("negotiate", "/nɪˈɡəʊʃieɪt/", "v. 谈判；协商", "They negotiate a new contract. 他们协商新合同。", "高中"),
+        Word("objective", "/əbˈdʒektɪv/", "n. 目标  adj. 客观的", "Our objective is to finish on time. 我们的目标是按时完成。", "高中"),
+        Word("obstacle", "/ˈɒbstəkl/", "n. 障碍；阻碍", "Fear is the biggest obstacle. 恐惧是最大的障碍。", "高中"),
+        Word("optimistic", "/ˌɒptɪˈmɪstɪk/", "adj. 乐观的", "Stay optimistic about the future. 对未来保持乐观。", "高中"),
+        Word("participate", "/pɑːˈtɪsɪpeɪt/", "v. 参加；参与", "Everyone can participate in the activity. 每个人都可以参加活动。", "高中"),
+        Word("passion", "/ˈpæʃn/", "n. 激情；热情", "She has a passion for art. 她对艺术充满热情。", "高中"),
+        Word("perspective", "/pəˈspektɪv/", "n. 观点；视角", "See things from a new perspective. 从新的视角看问题。", "高中"),
+        Word("phenomenon", "/fəˈnɒmɪnən/", "n. 现象", "This is a common natural phenomenon. 这是常见的自然现象。", "高中"),
+        Word("potential", "/pəˈtenʃl/", "n. 潜力  adj. 潜在的", "Everyone has great potential. 每个人都有巨大的潜力。", "高中"),
+        Word("practical", "/ˈpræktɪkl/", "adj. 实际的；实用的", "We need practical experience. 我们需要实践经验。", "高中"),
+        Word("precise", "/prɪˈsaɪs/", "adj. 精确的；准确的", "Please give me precise figures. 请给我精确的数据。", "高中"),
+        Word("principle", "/ˈprɪnsəpl/", "n. 原则；原理", "Honesty is my principle. 诚实是我的原则。", "高中"),
+        Word("priority", "/praɪˈɒrəti/", "n. 优先事项；优先权", "Safety is our top priority. 安全是我们的首要任务。", "高中"),
+        Word("prohibit", "/prəˈhɪbɪt/", "v. 禁止", "Smoking is prohibited here. 这里禁止吸烟。", "高中"),
+        Word("promote", "/prəˈməʊt/", "v. 促进；提升", "Reading promotes thinking. 阅读促进思考。", "高中"),
+        Word("prospect", "/ˈprɒspekt/", "n. 前景；可能性", "The job has good prospects. 这份工作前景很好。", "高中"),
+        Word("punctual", "/ˈpʌŋktʃuəl/", "adj. 准时的", "He is always punctual. 他总是很准时。", "高中"),
+        Word("pursue", "/pəˈsjuː/", "v. 追求；从事", "Pursue your dreams bravely. 勇敢地追求你的梦想。", "高中"),
+        Word("realistic", "/ˌriːəˈlɪstɪk/", "adj. 现实的；实际的", "Set realistic goals. 设定现实的目标。", "高中"),
+        Word("recognize", "/ˈrekəɡnaɪz/", "v. 认出；承认", "I recognized her at once. 我立刻认出了她。", "高中"),
+        Word("recommend", "/ˌrekəˈmend/", "v. 推荐；建议", "I recommend this book to you. 我把这本书推荐给你。", "高中"),
+        Word("reliable", "/rɪˈlaɪəbl/", "adj. 可靠的；可信赖的", "He is a reliable friend. 他是个可靠的朋友。", "高中"),
+        Word("remarkable", "/rɪˈmɑːkəbl/", "adj. 非凡的；显著的", "She made remarkable progress. 她取得了显著的进步。", "高中"),
+        Word("represent", "/ˌreprɪˈzent/", "v. 代表；象征", "The dove represents peace. 鸽子象征和平。", "高中"),
+        Word("resource", "/rɪˈsɔːs/", "n. 资源", "Water is a precious resource. 水是珍贵的资源。", "高中"),
+        Word("responsibility", "/rɪˌspɒnsəˈbɪləti/", "n. 责任；职责", "We have a responsibility to society. 我们对社会负有责任。", "高中"),
+        Word("significant", "/sɪɡˈnɪfɪkənt/", "adj. 重要的；显著的", "This is a significant discovery. 这是一项重大发现。", "高中"),
+        Word("sophisticated", "/səˈfɪstɪkeɪtɪd/", "adj. 复杂的；精密的", "This is a sophisticated system. 这是一个复杂的系统。", "高中"),
+        Word("strategy", "/ˈstrætədʒi/", "n. 策略；战略", "We need a new strategy. 我们需要新策略。", "高中"),
+        Word("sustain", "/səˈsteɪn/", "v. 维持；支撑", "We must sustain economic growth. 我们必须维持经济增长。", "高中"),
+        Word("tackle", "/ˈtækl/", "v. 处理；应对", "Let's tackle the problem now. 我们现在处理这个问题吧。", "高中"),
+        Word("temporary", "/ˈtemprəri/", "adj. 暂时的；临时的", "This is only a temporary solution. 这只是临时方案。", "高中"),
+        Word("transform", "/trænsˈfɔːm/", "v. 改变；转变", "Education transforms lives. 教育改变人生。", "高中"),
+        Word("ultimate", "/ˈʌltɪmət/", "adj. 最终的；根本的", "The ultimate goal is peace. 最终目标是和平。", "高中"),
+        Word("unique", "/juˈniːk/", "adj. 独特的；唯一的", "Everyone is unique. 每个人都是独一无二的。", "高中"),
+        Word("universal", "/ˌjuːnɪˈvɜːsl/", "adj. 普遍的；通用的", "Music is a universal language. 音乐是通用的语言。", "高中"),
+        Word("urgent", "/ˈɜːdʒənt/", "adj. 紧急的；急迫的", "This is an urgent matter. 这是紧急事务。", "高中"),
+        Word("valuable", "/ˈvæljuəbl/", "adj. 有价值的；宝贵的", "Time is valuable. 时间很宝贵。", "高中"),
+        Word("vital", "/ˈvaɪtl/", "adj. 至关重要的", "Water is vital to life. 水对生命至关重要。", "高中"),
+        Word("vivid", "/ˈvɪvɪd/", "adj. 生动的；鲜明的", "He gave a vivid description. 他做了生动的描述。", "高中"),
+        Word("volunteer", "/ˌvɒlənˈtɪə(r)/", "n. 志愿者  v. 自愿", "She works as a volunteer. 她是一名志愿者。", "高中"),
+    )
 }
