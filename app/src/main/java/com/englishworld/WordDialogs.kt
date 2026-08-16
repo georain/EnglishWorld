@@ -169,7 +169,7 @@ object WordDialogs {
 
             val current = questions[index]
             val options = (listOf(current.word) +
-                allWords.filter { it.word != current.word }.shuffled().take(3)).shuffled()
+                allWords.filter { it.word != current.word }.shuffled().take(3).map { it.word }).shuffled()
 
             tvProgress.text = "第 ${index + 1} / ${questions.size} 题"
             tvScore.text = "得分：$score"
