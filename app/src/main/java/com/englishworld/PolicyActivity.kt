@@ -25,7 +25,7 @@ class PolicyActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_IS_PRIVACY = "is_privacy"
 
-        const val PRIVACY_POLICY = """
+        val PRIVACY_POLICY = """
 《英语单词学习隐私政策》
 
 更新日期：2026年8月14日
@@ -62,7 +62,7 @@ class PolicyActivity : AppCompatActivity() {
 如您对本隐私政策有任何疑问、意见或建议，请通过官网（https://georain.github.io/EnglishWorld）与我们联系。
         """.trimIndent()
 
-        const val USER_AGREEMENT = """
+        val USER_AGREEMENT = """
 《英语单词学习用户协议》
 
 更新日期：2026年8月14日

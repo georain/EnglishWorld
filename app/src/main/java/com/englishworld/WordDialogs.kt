@@ -176,13 +176,13 @@ object WordDialogs {
             tvQuestion.text = current.meaning.split("；").first()
 
             options.forEachIndexed { i, opt ->
-                optionButtons[i].text = opt.word
+                optionButtons[i].text = opt
                 optionButtons[i].setOnClickListener {
                     if (answered) return@setOnClickListener
                     answered = true
                     val correctBtn = optionButtons[options.indexOfFirst { it == current.word }]
 
-                    if (opt.word == current.word) {
+                    if (opt == current.word) {
                         score++
                         tvScore.text = "得分：$score"
                         optionButtons[i].setBackgroundColor(Color.parseColor("#4CAF50"))
