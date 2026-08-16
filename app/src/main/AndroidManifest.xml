@@ -24,7 +24,12 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
-            
+
+        <activity
+            android:name=".PolicyActivity"
+            android:exported="false"
+            android:theme="@style/Theme.EnglishWorld" />
+
     </application>
 
 </manifest>
