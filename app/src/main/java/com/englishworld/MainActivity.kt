@@ -2,6 +2,7 @@ package com.englishworld
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayoutMediator
@@ -21,21 +22,31 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        userData = UserDataManager(this)
+        try {
+            binding = ActivityMainBinding.inflate(layoutInflater)
+            setContentView(binding.root)
 
-        setupViewPager()
-        setupTabLayout()
+            userData = UserDataManager(this)
 
-        // 首次启动弹出隐私政策与用户协议
-        binding.root.post {
-            if (!userData.isPrivacyAccepted) showPolicyDialog()
+            setupViewPager()
+            setupTabLayout()
+
+            binding.root.post {
+                if (!userData.isPrivacyAccepted) showPolicyDialog()
+            }
+        } catch (e: Throwable) {
+            // 捕获所有错误，直接显示在屏幕上
+            val tv = TextView(this).apply {
+                text = android.util.Log.getStackTraceString(e)
+                setPadding(40, 80, 40, 80)
+                textSize = 14f
+                setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Small)
+            }
+            setContentView(tv)
         }
     }
 
-    /** 供首页等功能卡片跳转到指定 Tab */
     fun navigateToTab(position: Int) {
         if (position in 0 until 4) {
             binding.viewPager.setCurrentItem(position, true)
@@ -51,14 +62,12 @@ class MainActivity : AppCompatActivity() {
             tab.setText(tabTitles[position])
         }.attach()
 
-        // 设置Tab图标
         binding.tabLayout.getTabAt(0)?.setIcon(R.drawable.ic_home)
         binding.tabLayout.getTabAt(1)?.setIcon(R.drawable.ic_search)
         binding.tabLayout.getTabAt(2)?.setIcon(R.drawable.ic_learn)
         binding.tabLayout.getTabAt(3)?.setIcon(R.drawable.ic_mine)
     }
 
-    /** 首次启动协议弹窗 */
     private fun showPolicyDialog() {
         MaterialAlertDialogBuilder(this)
             .setTitle("欢迎使用英语单词学习")
