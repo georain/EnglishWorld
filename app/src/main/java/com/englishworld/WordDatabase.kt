@@ -8,11 +8,9 @@ import android.content.Context
  */
 class WordDatabase(context: Context) {
 
-    private val allWords: List<Word> = buildList {
-        addAll(primarySchoolWords)
-        addAll(middleSchoolWords)
-        addAll(highSchoolWords)
-    }
+    // 使用 get() = 计算属性，彻底避免初始化顺序导致的 NPE
+    private val allWords: List<Word>
+        get() = primarySchoolWords + middleSchoolWords + highSchoolWords
 
     /** 按等级获取单词列表 */
     fun getWordsByLevel(level: String): List<Word> = when (level) {
