@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!-- 缓存目录：存放从选中位置复制过来的待安装 APK -->
+    <cache-path
+        name="apk_cache"
+        path="apk/" />
+    <!-- 外部缓存目录（兼容部分设备） -->
+    <external-cache-path
+        name="ext_apk_cache"
+        path="apk/" />
+</paths>
