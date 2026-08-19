@@ -9,7 +9,8 @@ import android.content.Context
 class WordDatabase(context: Context) {
 
     // 使用 get() = 计算属性，彻底避免初始化顺序导致的 NPE
-    private val allWords: List<Word>
+    // 命名避开 allWords，防止其合成的 getAllWords() 与下方 fun getAllWords() 产生 JVM 签名冲突
+    private val combinedWords: List<Word>
         get() = primarySchoolWords + middleSchoolWords + highSchoolWords
 
     /** 按等级获取单词列表 */
@@ -21,17 +22,17 @@ class WordDatabase(context: Context) {
     }
 
     /** 获取全部单词 */
-    fun getAllWords(): List<Word> = allWords
+    fun getAllWords(): List<Word> = combinedWords
 
     /** 单词总数 */
-    fun getTotalCount(): Int = allWords.size
+    fun getTotalCount(): Int = combinedWords.size
 
     /** 精确查询（支持中英文，先匹配英文单词，再匹配中文释义） */
     fun searchWord(query: String): Word? {
         val q = query.trim()
         if (q.isEmpty()) return null
-        allWords.find { it.word.equals(q, ignoreCase = true) }?.let { return it }
-        return allWords.find { it.meaning.contains(q) }
+        combinedWords.find { it.word.equals(q, ignoreCase = true) }?.let { return it }
+        return combinedWords.find { it.meaning.contains(q) }
     }
 
     /** 模糊搜索（支持英文前缀/包含、中文释义、音标），按相关度排序 */
@@ -39,7 +40,7 @@ class WordDatabase(context: Context) {
         val q = query.trim()
         if (q.isEmpty()) return emptyList()
         val lower = q.lowercase()
-        return allWords.filter {
+        return combinedWords.filter {
             it.word.lowercase().contains(lower) ||
                 it.meaning.contains(q) ||
                 it.phonetic.contains(q)
@@ -48,7 +49,7 @@ class WordDatabase(context: Context) {
 
     /** 根据单词查找完整信息 */
     fun findByWord(word: String): Word? =
-        allWords.find { it.word.equals(word, ignoreCase = true) }
+        combinedWords.find { it.word.equals(word, ignoreCase = true) }
 
     companion object {
         const val LEVEL_PRIMARY = "小学"
