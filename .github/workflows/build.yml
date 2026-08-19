@@ -34,7 +34,25 @@ jobs:
       run: chmod +x gradlew
 
     - name: Build Debug APK
-      run: ./gradlew assembleDebug --no-daemon
+      run: ./gradlew assembleDebug --no-daemon --stacktrace --info 2>&1 | tee build.log
+      shell: bash
+
+    - name: Show build errors on failure
+      if: failure()
+      run: |
+        echo "==================== BUILD ERRORS ===================="
+        grep -E "^e: |error:|FAILURE:|What went wrong|Execution failed|Caused by:|\.kt:" build.log | head -100 || true
+        echo "==================== LAST 120 LINES ===================="
+        tail -120 build.log || true
+      shell: bash
+
+    - name: Upload build log
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-log
+        path: build.log
+        retention-days: 7
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
